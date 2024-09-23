@@ -7,7 +7,8 @@ def checkout(skus: str) -> int:
     pricings = pd.DataFrame({
         'Item': ['A','B','C','D'],
         'Price': [50, 30, 20, 15],
-        'Special offers': ['3A for 130', '2B for 45', None, None]
+        'Special offer count': ['3', '2', None, None],
+        'Special offer price': [130, 45, None, None]
     })
 
     if not isinstance(skus, str):
@@ -25,3 +26,4 @@ def checkout(skus: str) -> int:
         print(f"item: {item}, count: {n}, price: {total}")
     
 checkout('ABCD')
+
