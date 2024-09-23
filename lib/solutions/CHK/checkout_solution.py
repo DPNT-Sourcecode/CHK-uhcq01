@@ -14,7 +14,7 @@ def checkout(skus: str) -> int:
         'Special offer count': [
             5, 3, 1, 2, 1, 1, 1, 1, 1, 1, 10, 5, 1, 1, 1, 2, 1, 1, 1, 1, 1, 5, 1, 3, 1, 1, 1, 1, 1, 3, 2, 1, 1, 1, 1, 1],
         'Special offer price': [
-            200, 130, 50, 45, 30, 20, 15, 40, 10, 20, 80, 45, 10, 35, 60, 150, 80, 90, 15, 40, 10, 200, 50, 80, 30, 50, 30, 20, 40, 130, 90, 50, 20, 90, 10, 50]
+            200, 130, 50, 45, 30, 20, 15, 40, 10, 20, 80, 45, 10, 35, 60, 120, 70, 90, 15, 40, 10, 200, 50, 80, 30, 50, 30, 20, 40, 130, 90, 50, 20, 90, 10, 50]
     })
 
     subtractions = pd.DataFrame({
@@ -89,3 +89,5 @@ assert checkout('NNNM') == 120
 assert checkout('VVVVV') == 220
 assert checkout('UUUU') == 120
 assert checkout('UUU') == 120
+assert checkout('K') == 70
+assert checkout('ABCDEFGHIJKLMNOPQRSTUVW') == 795
