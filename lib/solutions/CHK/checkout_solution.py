@@ -6,15 +6,6 @@ import re
 
 # noinspection PyUnusedLocal
 # skus = unicode string
-
-
-def isna(val):
-    if val != val:
-        return True
-    else:
-        return False
-
-
 def checkout(skus: str) -> int:
 
     pricings = pd.DataFrame({
@@ -45,7 +36,7 @@ def checkout(skus: str) -> int:
             total += floor(n / offer) * pricings[(pricings['Item'] == item) & (pricings['Special offer count'] == offer)]['Special offer price'].values[0]
             n = n % offer
 
-    return total
+    return int(total)
             
     
 
