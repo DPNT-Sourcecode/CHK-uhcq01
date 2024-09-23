@@ -12,9 +12,9 @@ def checkout(skus: str) -> int:
         'Special offer price': [130, 45, None, None]
     })
 
+    # Check for valid input
     if not isinstance(skus, str):
         return -1
-    
     if len(skus) == 0:
         return -1
     
@@ -25,7 +25,6 @@ def checkout(skus: str) -> int:
         n = skus.count(row['Item']) # Occurrences of the item in the basket
 
         if row['Special offer count'] is not None and n >= row['Special offer count']:
-
             offer_count = floor(n / row['Special offer count'])
             remainder = n - (row['Special offer count'] * offer_count)
 
@@ -33,11 +32,12 @@ def checkout(skus: str) -> int:
             total += remainder * row['Price']
 
         else:
-
             total += n * row['Price']
 
-    return total
+    return int(total)
             
     
 print(checkout('ABCD'))
 print(checkout('AAA'))
+print(checkout('BBBBB'))
+print(checkout('AAAAAA'))
