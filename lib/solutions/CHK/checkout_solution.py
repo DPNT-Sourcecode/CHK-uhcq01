@@ -27,7 +27,7 @@ def checkout(skus: str) -> int:
     if not isinstance(skus, str):
         return -1 # Input was not a string
     
-    filtered_skus = re.sub(r'[^ABCDEF]', '', skus)
+    filtered_skus = re.sub(r'[^ABCDEFGHIJKLMNOPQRSTUVWXYZ]', '', skus)
     if len(filtered_skus) < len(skus):
         return -1 # Invalid characters were present
     
@@ -35,9 +35,10 @@ def checkout(skus: str) -> int:
     print(item_counter)
 
     for i, row in subtractions.iterrows():
-        if item_counter[row['Item']] > row['Count'] and item_counter[row['Subtract']] > 0:
+        if item_counter[row['Item']] >= row['Count'] and item_counter[row['Subtract']] > 0:
             item_counter[row['Subtract']] -= floor(item_counter[row['Item']] / row['Count'])
         
+    print(item_counter)
     total = 0
 
     for item in item_counter:
@@ -66,6 +67,7 @@ assert checkout('EEEEEBBB') == 230
 assert checkout('EEEEEBBBFF') == 250
 assert checkout('EEEEEBBBFFF') == 250
 assert checkout('EEEEEBBBFFFF') == 260
+assert checkout('NNNM') == 120
 
 
 # print(item_counter)
@@ -75,3 +77,4 @@ assert checkout('EEEEEBBBFFFF') == 260
 # if item_counter['F'] >= 3:
 #     item_counter['F'] -= floor(item_counter['F'] / 3)
 # print(item_counter)
+
