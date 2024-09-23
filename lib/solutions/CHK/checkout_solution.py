@@ -10,9 +10,15 @@ def checkout(skus: str) -> int:
         'Special offers': ['3A for 130', '2B for 45', None, None]
     })
 
-    print(pricings)
-
     if not isinstance(skus, str):
         return -1
+    
+    total = 0
+
+    for item in pricings['Item']:
+        n = skus.count(item)
+        price = pricings[pricings['Item'] == item]['Price']
+        total += n * price
+        print(f"item: {item}, count: {n}, price: {price}")
     
 checkout('sdas')
