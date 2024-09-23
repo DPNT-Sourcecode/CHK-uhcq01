@@ -23,11 +23,18 @@ def checkout(skus: str) -> int:
         'Subtract': ['B', 'F', 'M', 'Q', 'U']
     })
 
+    stxwyz_values = {
+        'S': 20, 'T': 20, 'X': 17, 'Y': 20, 'Z': 21
+    }
+
 
     if not isinstance(skus, str):
         return -1 # Input was not a string
     
-    filtered_skus = re.sub(r'[^ABCDEFGHIJKLMNOPQRSTUVWXYZ]', '', skus)
+    stxyz = re.sub(r'[^STXYZ]', '', skus)
+
+    
+    filtered_skus = re.sub(r'[^ABCDEFGHIJKLMNOPQRUVW]', '', skus)
     if len(filtered_skus) < len(skus):
         return -1 # Invalid characters were present
     
@@ -79,5 +86,6 @@ assert checkout('UUU') == 120
 # if item_counter['F'] >= 3:
 #     item_counter['F'] -= floor(item_counter['F'] / 3)
 # print(item_counter)
+
 
 
