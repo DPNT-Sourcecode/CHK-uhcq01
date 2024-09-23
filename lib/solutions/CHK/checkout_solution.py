@@ -39,10 +39,9 @@ def checkout(skus: str) -> int:
     stxyz = re.sub(r'[^STXYZ]', '', skus)
     stxyz = [stxyz_values[v] for v in stxyz]
     stxyz.sort(reverse=True)
-    if len(stxyz) >= 3:
-        while len(stxyz) >= 3:
-            total += 45
-            stxyz = stxyz[3:]
+    while len(stxyz) >= 3:
+        total += 45
+        stxyz = stxyz[3:]
     else:
         total += sum(stxyz)
 
@@ -69,21 +68,24 @@ def checkout(skus: str) -> int:
     return int(total)
             
 
-print(checkout('SSTXYZ'))
-# assert checkout('FF') == 20
-# assert checkout('ABCD') == 115
-# assert checkout('AAA') == 130
-# assert checkout('AAAAA') == 200
-# assert checkout('EE') == 80
-# assert checkout('a') == -1
-# assert checkout('-') == -1
-# assert checkout('EEB') == 80
-# assert checkout('EEBB') == 110
-# assert checkout('EEEEEBBB') == 230
-# assert checkout('EEEEEBBBFF') == 250
-# assert checkout('EEEEEBBBFFF') == 250
-# assert checkout('EEEEEBBBFFFF') == 260
-# assert checkout('NNNM') == 120
-# assert checkout('VVVVV') == 220
-# assert checkout('UUUU') == 120
-# assert checkout('UUU') == 120
+assert checkout('STXYZ') == 45 + 20 + 17
+assert checkout('SZTXYZ') == 90
+assert checkout('SZTXYZA') == 140
+assert checkout('SZTXYZS') == 107
+assert checkout('FF') == 20
+assert checkout('ABCD') == 115
+assert checkout('AAA') == 130
+assert checkout('AAAAA') == 200
+assert checkout('EE') == 80
+assert checkout('a') == -1
+assert checkout('-') == -1
+assert checkout('EEB') == 80
+assert checkout('EEBB') == 110
+assert checkout('EEEEEBBB') == 230
+assert checkout('EEEEEBBBFF') == 250
+assert checkout('EEEEEBBBFFF') == 250
+assert checkout('EEEEEBBBFFFF') == 260
+assert checkout('NNNM') == 120
+assert checkout('VVVVV') == 220
+assert checkout('UUUU') == 120
+assert checkout('UUU') == 120
