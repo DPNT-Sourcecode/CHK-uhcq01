@@ -13,11 +13,12 @@ def checkout(skus: str) -> int:
         'Special offer price': [130, 45, None, None]
     })
 
-    # Check for valid input
     if not isinstance(skus, str):
-        return -1
+        return -1 # Input was not a string
     
     filtered_skus = re.sub(r'[^ABCD]', '', skus)
+    if len(filtered_skus) < len(skus):
+        return -1 # Invalid characters were present
     
     
     total = 0
@@ -43,3 +44,5 @@ print(checkout('ABCD'))
 print(checkout('AAA'))
 print(checkout('BBBBB'))
 print(checkout('AAAAAA'))
+print(checkout('a'))
+print(checkout('-'))
