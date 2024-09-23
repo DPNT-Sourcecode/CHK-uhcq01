@@ -37,23 +37,26 @@ def checkout(skus: str) -> int:
     if len(filtered_skus) < len(skus):
         return -1 # Invalid characters were present
     
+    item_counter = Counter(filtered_skus)
+    print(item_counter)
+    item_counter['B'] -= floor(item_counter['E'] / 2)
+    print(item_counter)
     
-    
 
-    total = 0
+    # total = 0
 
-    for item in items:
-        n = filtered_skus.count(item) # Occurrences of the item in the basket
+    # for item in items:
+    #     n = filtered_skus.count(item) # Occurrences of the item in the basket
 
-        offer_thresholds = list(pricings[pricings['Item'] == item]['Special offer count'].values)
-        offer_thresholds.sort(reverse=True)
+    #     offer_thresholds = list(pricings[pricings['Item'] == item]['Special offer count'].values)
+    #     offer_thresholds.sort(reverse=True)
 
-        for offer in offer_thresholds:
-            total += floor(n / offer) * pricings[(pricings['Item'] == item) & (pricings['Special offer count'] == offer)]['Special offer price'].values[0]
-            n = n % offer
+    #     for offer in offer_thresholds:
+    #         total += floor(n / offer) * pricings[(pricings['Item'] == item) & (pricings['Special offer count'] == offer)]['Special offer price'].values[0]
+    #         n = n % offer
 
-    print(total)
-    return total
+    # print(total)
+    # return total
             
     
 assert checkout('ABCD') == 115
@@ -64,6 +67,7 @@ assert checkout('a') == -1
 assert checkout('-') == -1
 assert checkout('EEB') == 80
 assert checkout('EEBB') == 110
+
 
 
 
