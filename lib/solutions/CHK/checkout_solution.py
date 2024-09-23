@@ -21,17 +21,23 @@ def checkout(skus: str) -> int:
     total = 0
 
     for i, row in pricings.iterrows():
-        n = skus.count(row['Item'])
+        
+        n = skus.count(row['Item']) # Occurrences of the item in the basket
 
-        if row['Special offer count'] is not None:
+        if row['Special offer count'] is not None and n >= row['Special offer count']:
 
-            floor(n / row['Special offer count'])
+            offer_count = floor(n / row['Special offer count'])
+            remainder = n - (row['Special offer count'] * offer_count)
 
+            total += offer_count * row['Special offer price']
+            total += remainder * row['Price']
 
-   
-        # price = pricings[pricings['Item'] == item]['Price'].values[0]
-        # total += n * price
-        # print(f"item: {item}, count: {n}, price: {total}")
+        else:
+
+            total += n * row['Price']
+
+    return total
+            
     
-checkout('ABCD')
-
+print(checkout('ABCD'))
+print(checkout('AAA'))
