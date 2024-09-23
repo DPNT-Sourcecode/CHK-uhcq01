@@ -26,7 +26,7 @@ def checkout(skus: str) -> int:
     if item_counter['B'] > 0:
         item_counter['B'] -= floor(item_counter['E'] / 2)
 
-    if item_counter['F'] >= 2:
+    if item_counter['F'] >= 3:
         item_counter['F'] -= floor(item_counter['F'] / 2)
     print(item_counter)
     
@@ -45,7 +45,7 @@ def checkout(skus: str) -> int:
     return int(total)
             
     
-
+assert checkout('FF') == 20
 assert checkout('ABCD') == 115
 assert checkout('AAA') == 130
 assert checkout('AAAAA') == 200
@@ -55,6 +55,6 @@ assert checkout('-') == -1
 assert checkout('EEB') == 80
 assert checkout('EEBB') == 110
 assert checkout('EEEEEBBB') == 230
-assert checkout('EEEEEBBBFF') == 240
+assert checkout('EEEEEBBBFF') == 250
 assert checkout('EEEEEBBBFFF') == 250
-assert checkout('EEEEEBBBFFFF') == 250
+assert checkout('EEEEEBBBFFFF') == 260
