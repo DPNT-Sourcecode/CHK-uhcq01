@@ -12,10 +12,14 @@ def checkout(skus: str) -> int:
         'Item': [
             'A', 'A', 'A', 'B', 'B', 'C', 'D', 'E', 'F','G','H','H','H','I','J','K','K','L','M','N','O','P','P','Q','Q','R','S','T','U','V','V','V','W','X','Y','Z'],
         'Special offer count': [
-            5, 3, 1, 2, 1, 1, 1, 1, 1, 1, 10, 5, 1, 1, 1, 2, 1, 1, 1, 1, 1, 5, 1, 3, 1, 1, 1, 1, 1, 3, 2, 1, 1, 1, 1, 1, 1],
+            5, 3, 1, 2, 1, 1, 1, 1, 1, 1, 10, 5, 1, 1, 1, 2, 1, 1, 1, 1, 1, 5, 1, 3, 1, 1, 1, 1, 1, 3, 2, 1, 1, 1, 1, 1],
         'Special offer price': [
             200, 130, 50, 45, 30, 20, 15, 40, 10, 20, 80, 45, 10, 35, 60, 150, 80, 90, 15, 40, 10, 200, 50, 80, 30, 50, 30, 20, 40, 130, 90, 50, 20, 90, 10, 50]
     })
+
+    subtractions = {
+        
+    }
 
     print(pricings)
 
@@ -27,6 +31,7 @@ def checkout(skus: str) -> int:
         return -1 # Invalid characters were present
     
     item_counter = Counter(filtered_skus)
+
     print(item_counter)
     if item_counter['B'] > 0:
         item_counter['B'] -= floor(item_counter['E'] / 2)
@@ -63,6 +68,3 @@ assert checkout('EEEEEBBB') == 230
 assert checkout('EEEEEBBBFF') == 250
 assert checkout('EEEEEBBBFFF') == 250
 assert checkout('EEEEEBBBFFFF') == 260
-
-
-
