@@ -28,15 +28,15 @@ def checkout(skus: str) -> int:
     items = ['A','B','C','D','E']
 
     pricings = pd.DataFrame({
-        'Item': ['A', 'A', 'A', 'B', 'B', 'C', 'D', 'E', 'E'],
-        'Special offer count': [5, 3, 1, 2, 1, 1, 1, 2, 1],
-        'Special offer price': [200, 130, 50, 45, 30, 20, 15, -30, 40]
+        'Item': ['A', 'A', 'A', 'B', 'B', 'C', 'D', 'E'],
+        'Special offer count': [5, 3, 1, 2, 1, 1, 1, 1],
+        'Special offer price': [200, 130, 50, 45, 30, 20, 15, 40]
     })
 
     if not isinstance(skus, str):
         return -1 # Input was not a string
     
-    filtered_skus = re.sub(r'[^ABCD]', '', skus)
+    filtered_skus = re.sub(r'[^ABCDE]', '', skus)
     if len(filtered_skus) < len(skus):
         return -1 # Invalid characters were present
     
@@ -52,6 +52,7 @@ def checkout(skus: str) -> int:
             total += floor(n / offer) * pricings[(pricings['Item'] == item) & (pricings['Special offer count'] == offer)]['Special offer price'].values[0]
             n = n % offer
 
+    print(total)
     return total
             
     
@@ -59,9 +60,10 @@ assert checkout('ABCD') == 115
 assert checkout('AAA') == 130
 assert checkout('AAAAA') == 200
 assert checkout('EE') == 80
-assert checkout('EEB') == 80
 assert checkout('a') == -1
 assert checkout('-') == -1
+assert checkout('EEB') == 80
+assert checkout('EEBB') == 80
 
 
 
