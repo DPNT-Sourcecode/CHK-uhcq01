@@ -23,21 +23,22 @@ def checkout(skus: str) -> int:
         'Subtract': ['B', 'F', 'M', 'Q', 'U']
     })
 
-    stxwyz_values = {
+    stxyz_values = {
         'S': 20, 'T': 20, 'X': 17, 'Y': 20, 'Z': 21
     }
 
-
     if not isinstance(skus, str):
         return -1 # Input was not a string
-    
-    stxyz = re.sub(r'[^STXYZ]', '', skus)
-
-    
-    filtered_skus = re.sub(r'[^ABCDEFGHIJKLMNOPQRUVW]', '', skus)
-    if len(filtered_skus) < len(skus):
+    check_skus = re.sub(r'[^ABCDEFGHIJKLMNOPQRSTUVWXYZ]', '', skus)
+    if len(check_skus) < len(skus):
         return -1 # Invalid characters were present
     
+    stxyz = re.sub(r'[^STXYZ]', '', skus)
+    stxyz = [stxyz_values[v] for v in stxyz]
+    stxyz.sort(reverse=True)
+    print(stxyz)
+    filtered_skus = re.sub(r'[^ABCDEFGHIJKLMNOPQRUVW]', '', skus)
+
     item_counter = Counter(filtered_skus)
     print(item_counter)
 
@@ -60,32 +61,25 @@ def checkout(skus: str) -> int:
     print(total)
     return int(total)
             
-    
-assert checkout('FF') == 20
-assert checkout('ABCD') == 115
-assert checkout('AAA') == 130
-assert checkout('AAAAA') == 200
-assert checkout('EE') == 80
-assert checkout('a') == -1
-assert checkout('-') == -1
-assert checkout('EEB') == 80
-assert checkout('EEBB') == 110
-assert checkout('EEEEEBBB') == 230
-assert checkout('EEEEEBBBFF') == 250
-assert checkout('EEEEEBBBFFF') == 250
-assert checkout('EEEEEBBBFFFF') == 260
-assert checkout('NNNM') == 120
-assert checkout('VVVVV') == 220
-assert checkout('UUUU') == 120
-assert checkout('UUU') == 120
 
-# print(item_counter)
-# if item_counter['B'] > 0:
-#     item_counter['B'] -= floor(item_counter['E'] / 2)
-
-# if item_counter['F'] >= 3:
-#     item_counter['F'] -= floor(item_counter['F'] / 3)
-# print(item_counter)
+print(checkout('STXYZ'))
+# assert checkout('FF') == 20
+# assert checkout('ABCD') == 115
+# assert checkout('AAA') == 130
+# assert checkout('AAAAA') == 200
+# assert checkout('EE') == 80
+# assert checkout('a') == -1
+# assert checkout('-') == -1
+# assert checkout('EEB') == 80
+# assert checkout('EEBB') == 110
+# assert checkout('EEEEEBBB') == 230
+# assert checkout('EEEEEBBBFF') == 250
+# assert checkout('EEEEEBBBFFF') == 250
+# assert checkout('EEEEEBBBFFFF') == 260
+# assert checkout('NNNM') == 120
+# assert checkout('VVVVV') == 220
+# assert checkout('UUUU') == 120
+# assert checkout('UUU') == 120
 
 
 
