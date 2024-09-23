@@ -27,7 +27,7 @@ def checkout(skus: str) -> int:
         item_counter['B'] -= floor(item_counter['E'] / 2)
 
     if item_counter['F'] >= 3:
-        item_counter['F'] -= floor(item_counter['F'] / 2)
+        item_counter['F'] -= floor(item_counter['F'] / 3)
     print(item_counter)
     
     total = 0
@@ -58,3 +58,4 @@ assert checkout('EEEEEBBB') == 230
 assert checkout('EEEEEBBBFF') == 250
 assert checkout('EEEEEBBBFFF') == 250
 assert checkout('EEEEEBBBFFFF') == 260
+
