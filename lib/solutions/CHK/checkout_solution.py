@@ -30,8 +30,8 @@ def checkout(skus: str) -> int:
     pricings = pd.DataFrame({
         'Item': ['A', 'A', 'B', 'C', 'D', 'E'],
         'Price': [50, 50, 30, 20, 15, 40],
-        'Special offer count': [3, 5, 2, None, None, 2],
-        'Special offer price': [130, 200, 45, None, None, '-B']
+        'Special offer count': [3, 5, 2, 1, 1, 2],
+        'Special offer price': [130, 200, 45, 20, 15, '-B']
     })
 
     if not isinstance(skus, str):
@@ -50,26 +50,10 @@ def checkout(skus: str) -> int:
         offer_thresholds.sort(reverse=True)
 
         for offer in offer_thresholds:
-            
-            floor(n / offer) * pricings[(pricings['Item'] == item) & (pricings['Special offer count'] == offer)]['Special offer price']
+            total += floor(n / offer) * pricings[(pricings['Item'] == item) & (pricings['Special offer count'] == offer)]['Special offer price']
+            n = n % offer
 
-
-        #     offer_count = floor(n / row['Special offer count'])
-
-
-
-        # if len(pricings.loc[pricings['Item'] == item, 'Special offer count']) > 0 and 
-
-        # if row['Special offer count'] is not None and n >= row['Special offer count']:
-        #     offer_count = floor(n / row['Special offer count'])
-        #     remainder = n - (row['Special offer count'] * offer_count)
-        #     total += offer_count * row['Special offer price']
-        #     total += remainder * row['Price']
-
-        # else:
-        #     total += n * row['Price']
-
-    return int(total)
+    return total
             
     
     
@@ -80,4 +64,5 @@ print(checkout('BBBBB'))
 print(checkout('AAAAAA'))
 print(checkout('a'))
 print(checkout('-'))
+
 
