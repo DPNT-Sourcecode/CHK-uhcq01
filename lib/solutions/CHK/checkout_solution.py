@@ -23,7 +23,6 @@ def checkout(skus: str) -> int:
         'Subtract': ['B', 'F', 'M', 'Q', 'U']
     })
 
-    print(pricings)
 
     if not isinstance(skus, str):
         return -1 # Input was not a string
@@ -33,15 +32,12 @@ def checkout(skus: str) -> int:
         return -1 # Invalid characters were present
     
     item_counter = Counter(filtered_skus)
-
     print(item_counter)
-    if item_counter['B'] > 0:
-        item_counter['B'] -= floor(item_counter['E'] / 2)
 
-    if item_counter['F'] >= 3:
-        item_counter['F'] -= floor(item_counter['F'] / 3)
-    print(item_counter)
-    
+    for i, row in subtractions.iterrows():
+        if item_counter[row['Item']] > row['Count'] and item_counter[row['Subtract']] > 0:
+            item_counter[row['Subtract']] -= floor(item_counter[row['Item']] / row['Count'])
+        
     total = 0
 
     for item in item_counter:
@@ -70,3 +66,12 @@ assert checkout('EEEEEBBB') == 230
 assert checkout('EEEEEBBBFF') == 250
 assert checkout('EEEEEBBBFFF') == 250
 assert checkout('EEEEEBBBFFFF') == 260
+
+
+# print(item_counter)
+# if item_counter['B'] > 0:
+#     item_counter['B'] -= floor(item_counter['E'] / 2)
+
+# if item_counter['F'] >= 3:
+#     item_counter['F'] -= floor(item_counter['F'] / 3)
+# print(item_counter)
