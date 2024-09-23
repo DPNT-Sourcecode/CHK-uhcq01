@@ -17,7 +17,7 @@ def checkout(skus: str) -> int:
     if not isinstance(skus, str):
         return -1 # Input was not a string
     
-    filtered_skus = re.sub(r'[^ABCDE]', '', skus)
+    filtered_skus = re.sub(r'[^ABCDEF]', '', skus)
     if len(filtered_skus) < len(skus):
         return -1 # Invalid characters were present
     
@@ -26,7 +26,7 @@ def checkout(skus: str) -> int:
     if item_counter['B'] > 0:
         item_counter['B'] -= floor(item_counter['E'] / 2)
 
-    if item_counter['F'] > 2:
+    if item_counter['F'] >= 2:
         item_counter['F'] -= floor(item_counter['F'] / 2)
     print(item_counter)
     
@@ -56,3 +56,5 @@ assert checkout('EEB') == 80
 assert checkout('EEBB') == 110
 assert checkout('EEEEEBBB') == 230
 assert checkout('EEEEEBBBFF') == 240
+assert checkout('EEEEEBBBFFF') == 250
+assert checkout('EEEEEBBBFFFF') == 250
