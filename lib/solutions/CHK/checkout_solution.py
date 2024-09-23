@@ -3,10 +3,6 @@ from math import floor
 from collections import Counter
 import re
 
-# noinspection PyUnusedLocal
-# skus = unicode string
-
-def checkout(skus: str) -> int:
 
     # pricings = pd.DataFrame({
     #     'Item': ['A','B','C','D'],
@@ -14,6 +10,12 @@ def checkout(skus: str) -> int:
     #     'Special offer count': [3, 2, None, None],
     #     'Special offer price': [130, 45, None, None]
     # })
+    
+# noinspection PyUnusedLocal
+# skus = unicode string
+
+def checkout(skus: str) -> int:
+
 
     items = ['A','B','C','D','E']
 
@@ -70,6 +72,7 @@ print(checkout('BBBBB'))
 print(checkout('AAAAAA'))
 print(checkout('a'))
 print(checkout('-'))
+
 
 
 
