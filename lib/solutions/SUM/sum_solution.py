@@ -11,5 +11,3 @@ def compute(x: int, y: int) -> int:
         return x + y
     else:
         raise Exception('x or y not in range 0 - 100')
-
-
