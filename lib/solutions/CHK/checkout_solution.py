@@ -46,9 +46,13 @@ def checkout(skus: str) -> int:
     for item in items:
         n = filtered_skus.count(item) # Occurrences of the item in the basket
 
-        offer_thresholds = pricings.loc[pricings['Item'] == item, 'Special offer count'].values
-        if not isna(offer_thresholds):
-            offer_count = floor(n / row['Special offer count'])
+        offer_thresholds = list(pricings[pricings['Item'] == item]['Special offer count'].values)
+        offer_thresholds.sort(reverse=True)
+        print(offer_thresholds)
+
+        # if not isna(offer_thresholds):
+
+        #     offer_count = floor(n / row['Special offer count'])
 
 
 
