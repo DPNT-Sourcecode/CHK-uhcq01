@@ -40,7 +40,9 @@ def checkout(skus: str) -> int:
     stxyz = [stxyz_values[v] for v in stxyz]
     stxyz.sort(reverse=True)
     if len(stxyz) >= 3:
-        
+        while len(stxyz) >= 3:
+            total += 45
+            stxyz = stxyz[3:]
     else:
         total += sum(stxyz)
 
@@ -85,7 +87,3 @@ print(checkout('SSTXYZ'))
 # assert checkout('VVVVV') == 220
 # assert checkout('UUUU') == 120
 # assert checkout('UUU') == 120
-
-
-
-
