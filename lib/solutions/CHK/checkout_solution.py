@@ -33,22 +33,27 @@ def checkout(skus: str) -> int:
     if len(check_skus) < len(skus):
         return -1 # Invalid characters were present
     
+    total = 0
+
+    # Process STXYZ
     stxyz = re.sub(r'[^STXYZ]', '', skus)
     stxyz = [stxyz_values[v] for v in stxyz]
     stxyz.sort(reverse=True)
-    print(stxyz)
+    if len(stxyz) >= 3:
+        
+    else:
+        total += sum(stxyz)
+
+
+    # Process BOGOF offers
     filtered_skus = re.sub(r'[^ABCDEFGHIJKLMNOPQRUVW]', '', skus)
-
     item_counter = Counter(filtered_skus)
-    print(item_counter)
-
     for i, row in subtractions.iterrows():
         if item_counter[row['Item']] >= row['Count'] and item_counter[row['Subtract']] > 0:
             item_counter[row['Subtract']] -= floor(item_counter[row['Item']] / row['Count'])
         
-    print(item_counter)
-    total = 0
 
+    # Sum up other offers
     for item in item_counter:
         n = item_counter[item]
         offer_thresholds = list(pricings[pricings['Item'] == item]['Special offer count'].values)
@@ -58,11 +63,11 @@ def checkout(skus: str) -> int:
             total += floor(n / offer) * pricings[(pricings['Item'] == item) & (pricings['Special offer count'] == offer)]['Special offer price'].values[0]
             n = n % offer
 
-    print(total)
+
     return int(total)
             
 
-print(checkout('STXYZ'))
+print(checkout('SSTXYZ'))
 # assert checkout('FF') == 20
 # assert checkout('ABCD') == 115
 # assert checkout('AAA') == 130
@@ -80,6 +85,7 @@ print(checkout('STXYZ'))
 # assert checkout('VVVVV') == 220
 # assert checkout('UUUU') == 120
 # assert checkout('UUU') == 120
+
 
 
 
