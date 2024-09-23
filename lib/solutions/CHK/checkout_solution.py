@@ -48,9 +48,11 @@ def checkout(skus: str) -> int:
 
         offer_thresholds = list(pricings[pricings['Item'] == item]['Special offer count'].values)
         offer_thresholds.sort(reverse=True)
-        print(offer_thresholds)
 
-        # if not isna(offer_thresholds):
+        for offer in offer_thresholds:
+            
+            floor(n / offer) * pricings[(pricings['Item'] == item) & (pricings['Special offer count'] == offer)]['Special offer price']
+
 
         #     offer_count = floor(n / row['Special offer count'])
 
@@ -78,3 +80,4 @@ print(checkout('BBBBB'))
 print(checkout('AAAAAA'))
 print(checkout('a'))
 print(checkout('-'))
+
