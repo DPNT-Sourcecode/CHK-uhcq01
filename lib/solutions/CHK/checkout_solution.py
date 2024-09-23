@@ -28,10 +28,9 @@ def checkout(skus: str) -> int:
     items = ['A','B','C','D','E']
 
     pricings = pd.DataFrame({
-        'Item': ['A', 'A', 'A', 'B', 'C', 'D', 'E'],
-        'Price': [50, 50, 30, 20, 15, 40],
+        'Item': ['A', 'A', 'A', 'B', 'B', 'C', 'D', 'E', 'E'],
         'Special offer count': [5, 3, 1, 2, 1, 1, 1, 2, 1],
-        'Special offer price': [200, 130, 50, 45, 30, 20, 15, 0]
+        'Special offer price': [200, 130, 50, 45, 30, 20, 15, -30, 40]
     })
 
     if not isinstance(skus, str):
@@ -56,14 +55,13 @@ def checkout(skus: str) -> int:
     return total
             
     
-    
-
-print(checkout('ABCD'))
-print(checkout('AAA'))
-print(checkout('BBBBB'))
-print(checkout('AAAAAA'))
-print(checkout('a'))
-print(checkout('-'))
+assert checkout('ABCD') == 115
+assert checkout('AAA') == 130
+assert checkout('AAAAA') == 200
+assert checkout('EE') == 80
+assert checkout('EEB') == 80
+assert checkout('a') == -1
+assert checkout('-') == -1
 
 
 
