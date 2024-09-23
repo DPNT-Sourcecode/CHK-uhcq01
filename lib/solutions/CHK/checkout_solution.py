@@ -28,10 +28,10 @@ def checkout(skus: str) -> int:
     items = ['A','B','C','D','E']
 
     pricings = pd.DataFrame({
-        'Item': ['A', 'A', 'B', 'C', 'D', 'E'],
+        'Item': ['A', 'A', 'A', 'B', 'C', 'D', 'E'],
         'Price': [50, 50, 30, 20, 15, 40],
-        'Special offer count': [3, 5, 2, 1, 1, 2],
-        'Special offer price': [130, 200, 45, 20, 15, '-B']
+        'Special offer count': [5, 3, 1, 2, 1, 1, 1, 2, 1],
+        'Special offer price': [200, 130, 50, 45, 30, 20, 15, 0]
     })
 
     if not isinstance(skus, str):
@@ -50,7 +50,7 @@ def checkout(skus: str) -> int:
         offer_thresholds.sort(reverse=True)
 
         for offer in offer_thresholds:
-            total += floor(n / offer) * pricings[(pricings['Item'] == item) & (pricings['Special offer count'] == offer)]['Special offer price']
+            total += floor(n / offer) * pricings[(pricings['Item'] == item) & (pricings['Special offer count'] == offer)]['Special offer price'].values[0]
             n = n % offer
 
     return total
@@ -64,5 +64,6 @@ print(checkout('BBBBB'))
 print(checkout('AAAAAA'))
 print(checkout('a'))
 print(checkout('-'))
+
 
 
