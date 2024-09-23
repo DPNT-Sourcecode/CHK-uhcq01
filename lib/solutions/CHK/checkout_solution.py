@@ -1,5 +1,6 @@
 import pandas as pd
 from math import floor
+import re
 
 # noinspection PyUnusedLocal
 # skus = unicode string
@@ -15,14 +16,15 @@ def checkout(skus: str) -> int:
     # Check for valid input
     if not isinstance(skus, str):
         return -1
-    if len(skus) == 0:
-        return -1
+    
+    filtered_skus = re.sub(r'[^ABCD]', '', skus)
+    
     
     total = 0
 
     for i, row in pricings.iterrows():
         
-        n = skus.count(row['Item']) # Occurrences of the item in the basket
+        n = filtered_skus.count(row['Item']) # Occurrences of the item in the basket
 
         if row['Special offer count'] is not None and n >= row['Special offer count']:
             offer_count = floor(n / row['Special offer count'])
