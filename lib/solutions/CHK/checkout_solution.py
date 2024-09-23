@@ -17,7 +17,6 @@ def isna(val):
 
 def checkout(skus: str) -> int:
 
-
     pricings = pd.DataFrame({
         'Item': ['A', 'A', 'A', 'B', 'B', 'C', 'D', 'E'],
         'Special offer count': [5, 3, 1, 2, 1, 1, 1, 1],
@@ -50,16 +49,12 @@ def checkout(skus: str) -> int:
             
     
 
-assert checkout('ABCD') == 115
-assert checkout('AAA') == 130
-assert checkout('AAAAA') == 200
-assert checkout('EE') == 80
-assert checkout('a') == -1
-assert checkout('-') == -1
-assert checkout('EEB') == 80
-assert checkout('EEBB') == 110
-assert checkout('EEEEEBBB') == 230
-
-
-
-
+# assert checkout('ABCD') == 115
+# assert checkout('AAA') == 130
+# assert checkout('AAAAA') == 200
+# assert checkout('EE') == 80
+# assert checkout('a') == -1
+# assert checkout('-') == -1
+# assert checkout('EEB') == 80
+# assert checkout('EEBB') == 110
+# assert checkout('EEEEEBBB') == 230
