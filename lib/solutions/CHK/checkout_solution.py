@@ -46,11 +46,11 @@ def checkout(skus: str) -> int:
     for item in items:
         n = filtered_skus.count(item) # Occurrences of the item in the basket
 
-        min_offer_value = min(pricings.loc[pricings['Item'] == item, 'Special offer count'].values)
-        if not isna(min_offer_value) and n >= min_offer_value:
-            
+        offer_thresholds = pricings.loc[pricings['Item'] == item, 'Special offer count'].values
+        if not isna(offer_thresholds):
+            offer_count = floor(n / row['Special offer count'])
 
-        print(item, min_offer_value)
+
 
         # if len(pricings.loc[pricings['Item'] == item, 'Special offer count']) > 0 and 
 
@@ -74,8 +74,3 @@ print(checkout('BBBBB'))
 print(checkout('AAAAAA'))
 print(checkout('a'))
 print(checkout('-'))
-
-
-
-
-
