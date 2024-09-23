@@ -4,6 +4,7 @@ import re
 
 # noinspection PyUnusedLocal
 # skus = unicode string
+
 def checkout(skus: str) -> int:
 
     # pricings = pd.DataFrame({
@@ -13,11 +14,13 @@ def checkout(skus: str) -> int:
     #     'Special offer price': [130, 45, None, None]
     # })
 
+    items = ['A','B','C','D','E']
+
     pricings = pd.DataFrame({
-        'Item': ['A','B','C','D'],
-        'Price': [50, 30, 20, 15],
-        'Special offer count': [3, 2, None, None],
-        'Special offer price': [130, 45, None, None]
+        'Item': ['A', 'A','B','C','D','E'],
+        'Price': [50, 50, 30, 20, 15],
+        'Special offer count': [3, 5, 2, None, None, 2],
+        'Special offer price': [130, 200, 45, None, None, 0]
     })
 
     if not isinstance(skus, str):
@@ -29,7 +32,7 @@ def checkout(skus: str) -> int:
     
     
 
-    
+
     total = 0
 
     for i, row in pricings.iterrows():
@@ -55,4 +58,5 @@ print(checkout('BBBBB'))
 print(checkout('AAAAAA'))
 print(checkout('a'))
 print(checkout('-'))
+
 
