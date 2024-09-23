@@ -68,7 +68,9 @@ assert checkout('EEEEEBBBFF') == 250
 assert checkout('EEEEEBBBFFF') == 250
 assert checkout('EEEEEBBBFFFF') == 260
 assert checkout('NNNM') == 120
-
+assert checkout('VVVVV') == 220
+assert checkout('UUUU') == 120
+assert checkout('UUU') == 120
 
 # print(item_counter)
 # if item_counter['B'] > 0:
@@ -77,4 +79,5 @@ assert checkout('NNNM') == 120
 # if item_counter['F'] >= 3:
 #     item_counter['F'] -= floor(item_counter['F'] / 3)
 # print(item_counter)
+
 
