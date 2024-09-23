@@ -17,9 +17,11 @@ def checkout(skus: str) -> int:
             200, 130, 50, 45, 30, 20, 15, 40, 10, 20, 80, 45, 10, 35, 60, 150, 80, 90, 15, 40, 10, 200, 50, 80, 30, 50, 30, 20, 40, 130, 90, 50, 20, 90, 10, 50]
     })
 
-    subtractions = {
-        
-    }
+    subtractions = pd.DataFrame({
+        'Item': ['E', 'F', 'N', 'R', 'U'],
+        'Count': [2, 3, 3, 3, 4],
+        'Subtract': ['B', 'F', 'M', 'Q', 'U']
+    })
 
     print(pricings)
 
