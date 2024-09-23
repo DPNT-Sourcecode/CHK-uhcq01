@@ -13,12 +13,15 @@ def checkout(skus: str) -> int:
     if not isinstance(skus, str):
         return -1
     
+    if len(skus) == 0:
+        return -1
+    
     total = 0
 
-    for item in pricings['Item']:
+    for item in list(pricings['Item']):
         n = skus.count(item)
-        price = pricings[pricings['Item'] == item]['Price']
+        price = pricings[pricings['Item'] == item]['Price'].values[0]
         total += n * price
-        print(f"item: {item}, count: {n}, price: {price}")
+        print(f"item: {item}, count: {n}, price: {total}")
     
-checkout('sdas')
+checkout('ABCD')
