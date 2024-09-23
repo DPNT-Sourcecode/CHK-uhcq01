@@ -18,12 +18,6 @@ def isna(val):
 def checkout(skus: str) -> int:
 
 
-    items = ['A','B','C','D','E']
-
-    subtractions = {
-        'EE': 'B'
-    }
-
     pricings = pd.DataFrame({
         'Item': ['A', 'A', 'A', 'B', 'B', 'C', 'D', 'E'],
         'Special offer count': [5, 3, 1, 2, 1, 1, 1, 1],
@@ -38,27 +32,24 @@ def checkout(skus: str) -> int:
         return -1 # Invalid characters were present
     
     item_counter = Counter(filtered_skus)
-    print(item_counter)
-    item_counter['B'] -= floor(item_counter['E'] / 2)
-    print(item_counter)
+    if item_counter['B'] > 0:
+        item_counter['B'] -= floor(item_counter['E'] / 2)
     
+    total = 0
 
-    # total = 0
+    for item in item_counter:
+        n = item_counter[item]
+        offer_thresholds = list(pricings[pricings['Item'] == item]['Special offer count'].values)
+        offer_thresholds.sort(reverse=True)
 
-    # for item in items:
-    #     n = filtered_skus.count(item) # Occurrences of the item in the basket
+        for offer in offer_thresholds:
+            total += floor(n / offer) * pricings[(pricings['Item'] == item) & (pricings['Special offer count'] == offer)]['Special offer price'].values[0]
+            n = n % offer
 
-    #     offer_thresholds = list(pricings[pricings['Item'] == item]['Special offer count'].values)
-    #     offer_thresholds.sort(reverse=True)
-
-    #     for offer in offer_thresholds:
-    #         total += floor(n / offer) * pricings[(pricings['Item'] == item) & (pricings['Special offer count'] == offer)]['Special offer price'].values[0]
-    #         n = n % offer
-
-    # print(total)
-    # return total
+    return total
             
     
+
 assert checkout('ABCD') == 115
 assert checkout('AAA') == 130
 assert checkout('AAAAA') == 200
@@ -67,6 +58,7 @@ assert checkout('a') == -1
 assert checkout('-') == -1
 assert checkout('EEB') == 80
 assert checkout('EEBB') == 110
+assert checkout('EEEEEBBB') == 230
 
 
 
