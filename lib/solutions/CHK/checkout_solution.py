@@ -4,13 +4,6 @@ from collections import Counter
 import re
 
 
-    # pricings = pd.DataFrame({
-    #     'Item': ['A','B','C','D'],
-    #     'Price': [50, 30, 20, 15],
-    #     'Special offer count': [3, 2, None, None],
-    #     'Special offer price': [130, 45, None, None]
-    # })
-
 # noinspection PyUnusedLocal
 # skus = unicode string
 
@@ -27,6 +20,10 @@ def checkout(skus: str) -> int:
 
     items = ['A','B','C','D','E']
 
+    subtractions = {
+        'EE': 'B'
+    }
+
     pricings = pd.DataFrame({
         'Item': ['A', 'A', 'A', 'B', 'B', 'C', 'D', 'E'],
         'Special offer count': [5, 3, 1, 2, 1, 1, 1, 1],
@@ -40,6 +37,9 @@ def checkout(skus: str) -> int:
     if len(filtered_skus) < len(skus):
         return -1 # Invalid characters were present
     
+    
+    
+
     total = 0
 
     for item in items:
@@ -63,7 +63,7 @@ assert checkout('EE') == 80
 assert checkout('a') == -1
 assert checkout('-') == -1
 assert checkout('EEB') == 80
-assert checkout('EEBB') == 80
+assert checkout('EEBB') == 110
 
 
 
